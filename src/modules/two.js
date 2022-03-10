@@ -1,7 +1,5 @@
 const two = () => {
-  const twoName = "two";
-
-  console.log(twoName);
+    console.log("two");
 }; 
 
 export default two;
