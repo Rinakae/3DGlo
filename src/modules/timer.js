@@ -2,13 +2,14 @@ const timer = (deadLine) => {
   const timerHours = document.getElementById("timer-hours");
   const timerMinutes = document.getElementById("timer-minutes");
   const timerSeconds = document.getElementById("timer-seconds");
-	
-  const getTimerRmaining = () => {
+	let timerId = null;
+
+  const getTimerRemaining = () => {
     let dateStop = new Date(deadLine).getTime();
     let dateNow = new Date().getTime();
     let timeRemaining = (dateStop - dateNow) / 1000;
     
-    let hours = Math.floor((timeRemaining / 60 / 60));
+    let hours = Math.floor(timeRemaining / 60 / 60);
     let minutes = Math.floor((timeRemaining / 60) % 60);
     let seconds = Math.floor(timeRemaining % 60);
     
@@ -23,18 +24,22 @@ const timer = (deadLine) => {
   };
 
   const updateclock = () => {
-    let getTime = getTimerRmaining();
+    let getTime = getTimerRemaining();
     
-    timerHours.textContent = getTime.hours;
-    timerMinutes.textContent = getTime.minutes;
-    timerSeconds.textContent = getTime.seconds;
+    timerHours.textContent = ("0" + getTime.hours.toString()).slice(-2);
+    timerMinutes.textContent = ("0" + getTime.minutes.toString()).slice(-2);
+    timerSeconds.textContent = ("0" + getTime.seconds.toString()).slice(-2);
 
-    if (getTime.timeRemaining > 0) {
-      setTimeout(updateclock, 1000);
+    if (getTime.timeRemaining <= 0) {
+      clearInterval(timerId);
+      timerHours.textContent = "00";
+      timerMinutes.textContent = "00";
+      timerSeconds.textContent = "00";
     }
     
   };
   updateclock();
+  timerId = setInterval(updateclock, 1000);
   
 }; 
 
