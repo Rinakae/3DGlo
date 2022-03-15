@@ -15,16 +15,15 @@ const firstScreen = () => {
   
   form1Email.addEventListener("input", (event) => {
     event.preventDefault();
-    let isError = false;
-    let reg = /[\-\.\w]+@([\w]+\.)+[\w]+/gi;
-    if (reg.test(event.target.value)) {
-      alert(" корректный Email");
-      //form1Email.value = "";
-      
+    
+    let reg = /^\w+([\.\~\!\*\'-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    if (event.target.value.match(reg)) {
+      form1Email.style.color = "green";       
     } else {
-      alert("Введите корректный Email");
-      isError = true;
+      form1Email.style.color = "red";      
     }
+
   });
   
   form1Phone.addEventListener("input", (event) => {
