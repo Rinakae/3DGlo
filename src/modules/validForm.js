@@ -7,40 +7,21 @@ const validForm = () => {
   formName.forEach(input => {
     input.addEventListener("input", (event) => {
       event.preventDefault();
-
-      if (event.target.value.match(/[^а-яА-Я-\s]/g)) {
-        alert("Введите имя используя кириллицу");
-        input.value = "";
-        return false;
-      } 
+      event.target.value = event.target.value.replace(/[^а-яА-Я-\s]/g, "");      
     });
   });
 
   formEmail.forEach(input => {
     input.addEventListener("input", (event) => {
       event.preventDefault();
-      
-      let reg = /^\w+([\.\~\!\*\'-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-      if (event.target.value.match(reg)) {
-        input.style.color = "green";       
-      } else {
-        input.style.color = "red";      
-      }
-
+      event.target.value = event.target.value.replace(/[^\w\@\_\.\!\~\*\'-]/g, "");      
     });
   });
 
   formPhone.forEach(input => {
     input.addEventListener("input", (event) => {
       event.preventDefault();
-        
-      if (event.target.value.match(/[^\d\()\-]/g)) {
-        alert("Введите номер телефона в формате 8(02)111-22-33");
-        input.value = "";
-        return false;
-      } 
-
+      event.target.value = event.target.value.replace(/[^\d\()\-]/g, "");      
     });
   });
     

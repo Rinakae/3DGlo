@@ -4,12 +4,7 @@ const calculator = () => {
   calcItem.forEach(item => {
     item.addEventListener("input", (event) => {
       event.preventDefault();
-
-      if (!event.target.value.match(/^\d+$/)) {
-        alert("Введите, пожалуйста, числовое значение");
-        item.value = "";
-        return false;
-      } 
+      event.target.value = event.target.value.replace(/[^\d]/g, "");
     });
   });
 
