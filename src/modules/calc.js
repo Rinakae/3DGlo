@@ -1,3 +1,7 @@
+"use strict";
+
+import { animate } from "./helpers";
+
 const calc = (price = 100) => {
   const calcBlock = document.querySelector('.calc-block');
   const calcType = document.querySelector('.calc-type');
@@ -31,7 +35,20 @@ const calc = (price = 100) => {
       totalValue = 0;
     }
     
-    total.textContent = totalValue;
+    total.textContent = totalValue;   
+    
+    //----------анимация бегущие цифры-------------    
+    animate({
+        duration: 300,
+        timing(timeFraction) {
+          return timeFraction;
+        },
+        draw(progress) {
+          total.textContent = Math.round(progress * totalValue);
+        }
+      });
+    //-----------------------
+    
     
   };
 
@@ -39,7 +56,7 @@ const calc = (price = 100) => {
 
     if (e.target === calcType || e.target === calcSquare ||
       e.target === calcCount || e.target === calcDay) {
-      countCalc();
+      countCalc();      
     }
   });
   
