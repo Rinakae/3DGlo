@@ -1,3 +1,7 @@
+"use strict";
+
+import { animate } from "./helpers";
+
 const modal = () => {
   
   const modal = document.querySelector(".popup");
@@ -5,9 +9,39 @@ const modal = () => {
   const closeBtn = modal.querySelector(".popup-close");
   const popupContent = modal.querySelector(".popup-content");
 
-  let idInterval;
-  let count = 0;  
+  let width = document.documentElement.clientWidth; 
+  
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      modal.style.display = 'block';      
 
+      animate({
+        duration: 500,
+        timing(timeFraction) {
+          return timeFraction;
+        },
+        draw(progress) {
+          popupContent.style.top = (progress * 10) + '%';
+        }
+      });
+    });    
+  });
+
+  if (width < 767) {
+    cancelAnimationFrame(animate);
+  }
+
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";    
+  }); 
+  
+};
+
+export default modal;
+
+//let idInterval;
+  //let count = 0;  
+/*
   const animate = () => {    
     count = count + 0.5;
     idInterval = requestAnimationFrame(animate);
@@ -20,32 +54,15 @@ const modal = () => {
       cancelAnimationFrame(idInterval);
     }   
   };
-
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      modal.style.display = 'block';
-
-      let width = document.documentElement.clientWidth;            
+---------------------------------
+let width = document.documentElement.clientWidth;            
       if (width < 767) {
         cancelAnimationFrame(idInterval);
-      } else {
-        animate();
-      }
-
-    });
-  });
-
-  /*
+      } 
+---------------------------------------
   buttons.forEach(btn => {
     btn.addEventListener("click", () => {
       modal.style.display = "block";          
     });
   });
   */
-  closeBtn.addEventListener("click", () => {
-    modal.style.display = "none";    
-  }); 
-  
-};
-
-export default modal;
