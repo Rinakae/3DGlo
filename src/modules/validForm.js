@@ -2,7 +2,7 @@ const validForm = () => {
   
   const formName = document.querySelectorAll(".form-name");
   const formEmail = document.querySelectorAll(".form-email");
-  const formPhone = document.querySelectorAll(".form-phone");
+  const formPhone = document.querySelectorAll(".form-phone");  
   
   formName.forEach(input => {
     input.addEventListener("input", (event) => {
@@ -12,6 +12,7 @@ const validForm = () => {
   });
 
   formEmail.forEach(input => {
+    //input.required = true;
     input.addEventListener("input", (event) => {
       event.preventDefault();
       event.target.value = event.target.value.replace(/[^\w\@\_\.\!\~\*\'-]/g, "");      

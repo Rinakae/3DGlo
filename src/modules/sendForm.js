@@ -16,44 +16,32 @@ const sendForm = ({ formId, someElem = []} ) => {
             }, 2000);
   }
   
+  const validInputs = (input) => {
+    if ((input.name === "user_name" && input.value.length > 2)
+        || (input.name === "user_email" && input.value !== "")
+        || (input.name === "user_phone" && (input.value.length > 6) && (input.value.length < 16))
+        || (input.name === "user_message" && /([^а-яё\s\d\,\.\"\?\!\:\;\-\)\(]*)$/.test(input.value))) {
+          input.classList.add ("success");
+          console.log (input.classList);
+    } else {
+      statusBlock.textContent = errorText;
+    }
+  };
+
   const validate = (list) => {
     let success = true; 
+    
+    list.forEach(input => {
 
-    list.forEach(input =>{
+      validInputs(input);
 
-      switch(input.name) {
-        case 'user_email':
-          if (!input.hasAttribute("required")) {
-            input.required = true;
-            redBorder(input);          
-            success = false;
-            break;
-          }             
-
-        case 'user_name':
-          if (input.value.length < 2) {
-            redBorder(input);                   
-            success = false;
-          }
-
-        case 'user_phone':
-          if (6 > input.value.length < 16) {
-            redBorder(input);                   
-            success = false;
-          }
-
-        case 'user_message':
-          input.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/[^а-яА-Я]+[\s]+[\d]+[\S]/g, '');
-            redBorder(input);                   
-            success = false;
-        });
+      if (!input.classList.contains("success")) {
+        redBorder(input);
+        success = false;
       }
-      
-   return success;
-       
-  });
-};
+    });
+    return success;
+  };  
 
   const sendData = (data) => {
     return fetch('https://jsonplaceholder.typicode.com/posts', {
@@ -69,7 +57,7 @@ const sendForm = ({ formId, someElem = []} ) => {
     const formElements = form.querySelectorAll('input');
     const formData = new FormData(form);
     const formBody = {};
-
+/////////////////
     statusBlock.textContent = loadText;
     form.append(statusBlock);
 
@@ -96,11 +84,8 @@ const sendForm = ({ formId, someElem = []} ) => {
         })
         .catch(error => {
           statusBlock.textContent = errorText;
-        });                 
-        
-        
-    } else {
-      
+        });         
+    } else {      
       alert('Данные не валидны!!!');
     }
   };
