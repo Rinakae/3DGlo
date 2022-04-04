@@ -8,6 +8,7 @@ const sendForm = ({ formId, someElem = []} ) => {
   const errorText = "Ошибка...";
   const successText = "Спасибо наш менеджер свяжется с вами!";
 
+  statusBlock.style = "color: #fff";
 
   function redBorder(element){
             element.style.border = '2px solid red';
@@ -75,7 +76,7 @@ const sendForm = ({ formId, someElem = []} ) => {
 
     if (validate(formElements)) {
       sendData(formBody)
-        .then(data => {
+        .then(data => {          
           statusBlock.textContent = successText;
           formElements.forEach(input => {
             input.value = '';
