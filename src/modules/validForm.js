@@ -2,7 +2,8 @@ const validForm = () => {
   
   const formName = document.querySelectorAll(".form-name");
   const formEmail = document.querySelectorAll(".form-email");
-  const formPhone = document.querySelectorAll(".form-phone");  
+  const formPhone = document.querySelectorAll(".form-phone"); 
+  const form2Message = document.querySelector(".mess"); 
   
   formName.forEach(input => {
     input.addEventListener("input", (event) => {
@@ -24,6 +25,11 @@ const validForm = () => {
       event.preventDefault();
       event.target.value = event.target.value.replace(/[^\d\()\+\-]/g, "");      
     });
+  });
+   
+  form2Message.addEventListener("input", (event) => {
+    event.preventDefault();
+    event.target.value = event.target.value.replace(/([^а-яё\s\d\,\.\"\?\!\:\;\-\)\(]*)/g, "");
   });
     
 };

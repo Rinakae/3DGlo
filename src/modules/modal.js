@@ -9,12 +9,12 @@ const modal = () => {
   const closeBtn = modal.querySelector(".popup-close");
   const popupContent = modal.querySelector(".popup-content");
 
-  let width = document.documentElement.clientWidth; 
-  
+   
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
       modal.style.display = 'block';      
 
+      if (window.screen.width > 767) {
       animate({
         duration: 500,
         timing(timeFraction) {
@@ -23,13 +23,15 @@ const modal = () => {
         draw(progress) {
           popupContent.style.top = (progress * 10) + '%';
         }
-      });
+      });     
+      } else {         
+        cancelAnimationFrame(animate);
+      }
     });    
+    
   });
 
-  if (width < 767) {
-    cancelAnimationFrame(animate);
-  }
+  
 
   closeBtn.addEventListener("click", () => {
     modal.style.display = "none";    

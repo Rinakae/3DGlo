@@ -20,9 +20,8 @@ const sendForm = ({ formId, someElem = []} ) => {
     if ((input.name === "user_name" && input.value.length > 2)
         || (input.name === "user_email" && input.value !== "")
         || (input.name === "user_phone" && (input.value.length > 6) && (input.value.length < 16))
-        || (input.name === "user_message" && /([^а-яё\s\d\,\.\"\?\!\:\;\-\)\(]*)$/.test(input.value))) {
-          input.classList.add ("success");
-          console.log (input.classList);
+        || (input.name === "user_message")) {
+          input.classList.add ("success");          
     } else {
       statusBlock.textContent = errorText;
     }
@@ -57,7 +56,7 @@ const sendForm = ({ formId, someElem = []} ) => {
     const formElements = form.querySelectorAll('input');
     const formData = new FormData(form);
     const formBody = {};
-/////////////////
+
     statusBlock.textContent = loadText;
     form.append(statusBlock);
 
