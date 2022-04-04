@@ -8,7 +8,7 @@ import slider from './modules/slider';
 import calc from './modules/calc';
 import sendForm from './modules/sendForm';
 
-timer("14 march 2022");
+timer("6 april 2022");
 menu();
 modal();
 calculator();
